@@ -72,13 +72,14 @@ class NdiOidcHelper {
      * Decrypts the ID Token JWT inside the TokenResponse to get the payload
      * Use extractNricAndUuidFromPayload on the returned Token Payload to get the NRIC and UUID
      */
-    async getIdTokenPayload(tokens) {
+    async getIdTokenPayload(tokens, overrideDecryptKey) {
         try {
             const { data: { jwks_uri } } = await this.axiosClient.get(this.oidcConfigUrl);
             const { data: { keys } } = await this.axiosClient.get(jwks_uri);
             const jwsVerifyKey = JSON.stringify(keys[0]);
             const { id_token } = tokens;
-            const decryptedJwe = await util_1.JweUtil.decryptJWE(id_token, this.jweDecryptKey.key, this.jweDecryptKey.format);
+            const finalDecryptionKey = overrideDecryptKey !== null && overrideDecryptKey !== void 0 ? overrideDecryptKey : this.jweDecryptKey;
+            const decryptedJwe = await util_1.JweUtil.decryptJWE(id_token, finalDecryptionKey.key, finalDecryptionKey.format);
             const jwsPayload = decryptedJwe.payload.toString();
             const verifiedJws = await util_1.JweUtil.verifyJWS(jwsPayload, jwsVerifyKey, 'json');
             return JSON.parse(verifiedJws.payload.toString());

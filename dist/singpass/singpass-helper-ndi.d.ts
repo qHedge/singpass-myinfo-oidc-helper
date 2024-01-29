@@ -27,7 +27,7 @@ export declare class NdiOidcHelper {
      * Decrypts the ID Token JWT inside the TokenResponse to get the payload
      * Use extractNricAndUuidFromPayload on the returned Token Payload to get the NRIC and UUID
      */
-    getIdTokenPayload(tokens: TokenResponse): Promise<TokenPayload>;
+    getIdTokenPayload(tokens: TokenResponse, overrideDecryptKey?: Key): Promise<TokenPayload>;
     /**
      * Returns the nric and uuid from the token payload
      */

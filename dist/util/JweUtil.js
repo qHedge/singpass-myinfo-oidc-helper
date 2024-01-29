@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyJwsUsingKeyStore = exports.verifyJWS = exports.decryptJWE = void 0;
+exports.extractJwtHeader = exports.verifyJwsUsingKeyStore = exports.verifyJWS = exports.decryptJWE = void 0;
 const jose = require("node-jose");
 const SingpassMyinfoError_1 = require("./error/SingpassMyinfoError");
 async function decryptJWE(jwe, decryptKey, format = 'pem') {
@@ -33,4 +33,10 @@ async function verifyJwsUsingKeyStore(jws, keys) {
     return jose.JWS.createVerify(keyStore).verify(jws);
 }
 exports.verifyJwsUsingKeyStore = verifyJwsUsingKeyStore;
+function extractJwtHeader(jwt) {
+    const jwtComponents = jwt.split(".");
+    const header = jose.util.base64url.decode(jwtComponents[0]);
+    return JSON.parse(header.toString());
+}
+exports.extractJwtHeader = extractJwtHeader;
 //# sourceMappingURL=JweUtil.js.map

@@ -74,10 +74,35 @@ const mrICAMommyScenario5_1 = require("./mrICAMommyScenario5");
 const mrICAMommyScenario6_1 = require("./mrICAMommyScenario6");
 const mrICAMommyScenario8_1 = require("./mrICAMommyScenario8");
 const mrCckResident1_1 = require("./mrCckResident1");
+const msCckResident2_1 = require("./msCckResident2");
+const mrCckResident3_1 = require("./mrCckResident3");
+const mrCckResident4_1 = require("./mrCckResident4");
+const msCckResident5_1 = require("./msCckResident5");
+const mrCckResident6_1 = require("./mrCckResident6");
+const msHbpResident1_1 = require("./msHbpResident1");
+const mrHbpResident2_1 = require("./mrHbpResident2");
+const msHbpResident3_1 = require("./msHbpResident3");
+const msHbpResident4_1 = require("./msHbpResident4");
+const mrHbpResident5_1 = require("./mrHbpResident5");
 const msHbpResident6_1 = require("./msHbpResident6");
+const mrMpResident1_1 = require("./mrMpResident1");
+const msMpResident2_1 = require("./msMpResident2");
+const mrMpResident3_1 = require("./mrMpResident3");
 const mrMpResident4_1 = require("./mrMpResident4");
+const msMpResident5_1 = require("./msMpResident5");
+const mrMpResident6_1 = require("./mrMpResident6");
+const msNsResident1_1 = require("./msNsResident1");
+const mrNsResident2_1 = require("./mrNsResident2");
+const mrNsResident3_1 = require("./mrNsResident3");
+const msNsResident4_1 = require("./msNsResident4");
 const mrNsResident5_1 = require("./mrNsResident5");
+const msNsResident6_1 = require("./msNsResident6");
 const msPrpgResident1_1 = require("./msPrpgResident1");
+const msPrpgResident2_1 = require("./msPrpgResident2");
+const mrPrpgResident3_1 = require("./mrPrpgResident3");
+const mrPrpgResident4_1 = require("./mrPrpgResident4");
+const mrPrpgResident5_1 = require("./mrPrpgResident5");
+const mrPrpgResident6_1 = require("./mrPrpgResident6");
 /**
  * Exhaustive list of our MyInfo archetype profiles
  * (Alphabetical order as much as possible)
@@ -156,9 +181,34 @@ exports.profiles = [
     mrICAMommyScenario6_1.mrsICAMommyScenario6,
     mrICAMommyScenario8_1.mrsICAMommyScenario8,
     mrCckResident1_1.mrCckResident1,
+    msCckResident2_1.msCckResident2,
+    mrCckResident3_1.mrCckResident3,
+    mrCckResident4_1.mrCckResident4,
+    msCckResident5_1.msCckResident5,
+    mrCckResident6_1.mrCckResident6,
+    msHbpResident1_1.msHbpResident1,
+    mrHbpResident2_1.mrHbpResident2,
+    msHbpResident3_1.msHbpResident3,
+    msHbpResident4_1.msHbpResident4,
+    mrHbpResident5_1.mrHbpResident5,
     msHbpResident6_1.msHbpResident6,
+    mrMpResident1_1.mrMpResident1,
+    msMpResident2_1.msMpResident2,
+    mrMpResident3_1.mrMpResident3,
     mrMpResident4_1.mrMpResident4,
+    msMpResident5_1.msMpResident5,
+    mrMpResident6_1.mrMpResident6,
+    msNsResident1_1.msNsResident1,
+    mrNsResident2_1.mrNsResident2,
+    mrNsResident3_1.mrNsResident3,
+    msNsResident4_1.msNsResident4,
     mrNsResident5_1.mrNsResident5,
-    msPrpgResident1_1.msPrpgResident1
+    msNsResident6_1.msNsResident6,
+    msPrpgResident1_1.msPrpgResident1,
+    msPrpgResident2_1.msPrpgResident2,
+    mrPrpgResident3_1.mrPrpgResident3,
+    mrPrpgResident4_1.mrPrpgResident4,
+    mrPrpgResident5_1.mrPrpgResident5,
+    mrPrpgResident6_1.mrPrpgResident6,
 ];
 //# sourceMappingURL=fake-profiles.js.map

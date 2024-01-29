@@ -62,7 +62,7 @@ export declare class NdiOidcHelper {
      * Decrypts the ID Token JWT inside the TokenResponse to get the payload
      * Use extractInfoFromIdTokenSubject on the returned Token Payload to get the NRIC, system defined ID and country code
      */
-    getIdTokenPayload(tokens: TokenResponse): Promise<NDIIdTokenPayload>;
+    getIdTokenPayload(tokens: TokenResponse, overrideDecryptKey?: Key): Promise<NDIIdTokenPayload>;
     /**
      * Returns the NRIC, system defined ID and country code from the ID token payload
      */
