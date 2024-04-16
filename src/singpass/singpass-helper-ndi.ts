@@ -152,10 +152,6 @@ export class NdiOidcHelper {
 		return status === 302 || (status >= 200 && status < 300);
 	}
 
-	private extractKeyByKeyId(keys: Record<string, unknown>[], keyId: string) {
-		return keys.find((key) => key.kid === keyId);
-	}
-
 	public _testExports = {
 		getSingpassClient: () => this.axiosClient,
 		validateStatusFn: this.validateStatus,
