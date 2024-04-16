@@ -111,14 +111,13 @@ export class NdiOidcHelper {
 			const {
 				data: { keys },
 			} = await this.axiosClient.get<{ keys: Object[] }>(jwks_uri);
-			const jwsVerifyKey = JSON.stringify(keys[0]);
 
 			const { id_token } = tokens;
 
 			const finalDecryptionKey = overrideDecryptKey ?? this.jweDecryptKey;
 			const decryptedJwe = await JweUtil.decryptJWE(id_token, finalDecryptionKey.key, finalDecryptionKey.format);
 			const jwsPayload = decryptedJwe.payload.toString();
-			const verifiedJws = await JweUtil.verifyJWS(jwsPayload, jwsVerifyKey, "json");
+			const verifiedJws = await JweUtil.verifyJwsUsingKeyStore(jwsPayload, keys);
 			return JSON.parse(verifiedJws.payload.toString()) as TokenPayload;
 		} catch (e) {
 			logger.error("Failed to get token payload", e);
@@ -151,6 +150,10 @@ export class NdiOidcHelper {
 
 	private validateStatus(status: number) {
 		return status === 302 || (status >= 200 && status < 300);
+	}
+
+	private extractKeyByKeyId(keys: Record<string, unknown>[], keyId: string) {
+		return keys.find((key) => key.kid === keyId);
 	}
 
 	public _testExports = {

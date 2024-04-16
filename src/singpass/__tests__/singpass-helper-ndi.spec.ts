@@ -106,17 +106,16 @@ describe("NDI Singpass Helper", () => {
 		const mockVerifiedJws = { payload: JSON.stringify({ mockResults: "VERIFIED_JWS" }) };
 
 		it("should use overrideDecryptKey when specified", async () => {
-			const corppassHelper = new NdiOidcHelper({
+			const singpassHelper = new NdiOidcHelper({
 				...props,
 			});
 
 			const mockDecryptJwe = jest
 				.spyOn(JweUtils, "decryptJWE")
 				.mockResolvedValueOnce({ payload: "DECRYPT_RESULTS" } as unknown as JWE.DecryptResult);
-			const mockVerifyJWS = jest
-				.spyOn(JweUtils, "verifyJWS")
-				.mockResolvedValueOnce(mockVerifiedJws as unknown as JWS.VerificationResult);
-
+			const mockVerifyJwsUsingKeyStore = jest.spyOn(JweUtils, "verifyJwsUsingKeyStore").mockResolvedValueOnce({
+				payload: JSON.stringify(mockVerifiedJws),
+			} as unknown as JWS.VerificationResult);
 			const mockJwksUrl = "https://www.mocksingpass.gov.sg/.well-known/keys";
 			const mockTokenEndpoint = "https://www.mocksingpass.gov.sg/mga/sps/oauth/oauth20/token";
 			const mockIssuer = "https://www.mocksingpass.gov.sg";
@@ -145,15 +144,15 @@ describe("NDI Singpass Helper", () => {
 				};
 			});
 
-			corppassHelper._testExports.getSingpassClient().get = axiosMock;
+			singpassHelper._testExports.getSingpassClient().get = axiosMock;
 
-			await corppassHelper.getIdTokenPayload(mockTokenResponse, { key: mockOverrideDecryptKey, format: "json" });
+			await singpassHelper.getIdTokenPayload(mockTokenResponse, { key: mockOverrideDecryptKey, format: "json" });
 
 			expect(axiosMock.mock.calls[0]).toEqual(expect.arrayContaining([mockOidcConfigUrl]));
 			expect(axiosMock.mock.calls[1]).toEqual(expect.arrayContaining([mockJwksUrl]));
 
 			expect(mockDecryptJwe).toHaveBeenCalledWith(mockTokenResponse.id_token, mockOverrideDecryptKey, "json");
-			expect(mockVerifyJWS).toHaveBeenCalledWith("DECRYPT_RESULTS", JSON.stringify("MOCK_KEY"), "json");
+			expect(mockVerifyJwsUsingKeyStore).toHaveBeenCalledWith("DECRYPT_RESULTS", ["MOCK_KEY"]);
 			expect(axiosMock).toHaveBeenCalledTimes(2);
 		});
 	});
